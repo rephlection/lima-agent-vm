@@ -1,0 +1,54 @@
+# reference: https://github.com/lima-vm/lima/blob/master/templates/default.yaml
+vmType: vz  # default for macOS, using Virtualization.Framework
+arch: aarch64
+
+images:
+  - location: https://cloud.debian.org/images/cloud/trixie/latest/debian-13-genericcloud-arm64.qcow2
+    arch: aarch64
+    variant: "genericcloud"
+cpus: 4
+memory: 8GiB
+disk: 100GiB
+
+mounts:
+  - location: "~/agt/workspace"
+    mountPoint: "/home/agent/workspace"
+    writable: true
+  - location: "~/agt/dotfiles"
+    mountPoint: "/home/agent/dotfiles"
+    writable: false
+  - location: "~/agt/bootstrap"
+    mountPoint: "/opt/bootstrap"
+    writable: false
+  - location: "~/agt/secrets" # host 700 dir, 600 dir/*
+    mountPoint: "/run/secrets"
+    writable: false
+mountType: virtiofs # experimental on linux; needs vz on macOS
+
+ssh:
+  # loadDotSSHPubKeys: true
+  forwardAgent: true  # export SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"?
+
+provision:  # provisioning scripts need to be idempotent
+  - mode: system
+    script: |
+      bash /opt/bootstrap/system.sh
+  - mode: user
+    script: |
+      bash /opt/bootstrap/user.sh
+
+user:
+  name: agent
+  home: /home/agent
+  shell: /bin/zsh
+
+networks:
+  # - lima: shared
+
+hostResolver:
+  enabled: false
+dns:
+  - 1.1.1.1
+  - 8.8.8.8
+  - 101.6.6.6
+
