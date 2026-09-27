@@ -9,12 +9,18 @@ MicroVM based methods are better.
 - Take a snapshot: [TODO]
 
 ## Functional requirements
-- [ ] idempotent environment initialization (base image link, tool/software installation)
+- [ ] idempotent environment initialization (base image link, tool/software installation; re-run guards in system/user init script)
 - [ ] folder sharing with proper rights
 - [ ] network isolation (inbound/outbound; invisible host)
-- [ ] ssh key forward (SSH_AUTH_SOCK)
+- [ ] ssh key forwarding (SSH_AUTH_SOCK; the current impl might be problematic)
 - [ ] safely pass in ENV credentials such as API keys
 
 ## Known issues
 - `limactl shell <vm>` might take ~5 seconds, which is slow
+- mounted folder might be lost if files on host are changed during e.g. git checkouts
+
+## Safety issues
+
+Secret management:
+- change `./secret` to `700` and all files under it to `600`
 

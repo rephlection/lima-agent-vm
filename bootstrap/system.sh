@@ -37,6 +37,7 @@ fi
 chsh -s /bin/zsh $USERNAME
 usermod -c "" $USERNAME
 # sudo
+rm -f /etc/sudoers.d/90-cloud-init-users
 echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/apt, /usr/bin/systemctl" \
     >/etc/sudoers.d/$USERNAME
 chmod 440 /etc/sudoers.d/$USERNAME
