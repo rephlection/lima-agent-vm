@@ -34,9 +34,14 @@ echo "END INSTALLING NVM"
 
 grep -qxF 'source ~/dotfiles/.zshrc' ~/.zshrc || echo 'source ~/dotfiles/.zshrc' >> ~/.zshrc
 
-# npm install -g \
-#  @openai/codex \
+CODEX_VERSION="0.158"
+mkdir -p "$HOME/.codex"
+
+npm install -g \
+	"@openai/codex@${CODEX_VERSION}"
 #  @anthropic-ai/claude-code
+
+install -m 600 "$HOME/dotfiles/.codex/config.toml" "$HOME/.codex/config.toml"
 
 # DOTFILES="$HOME/dotfiles"
 
