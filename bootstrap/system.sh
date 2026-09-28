@@ -15,6 +15,8 @@ apt install -y \
     zsh \
     tmux \
     ripgrep \
+    bubblewrap \
+    socat \
     fd-find \
     jq \
     build-essential \
