@@ -39,7 +39,6 @@ mkdir -p "$HOME/.codex"
 
 npm install -g \
 	"@openai/codex@${CODEX_VERSION}"
-#  @anthropic-ai/claude-code
 
 install -m 600 "$HOME/dotfiles/.codex/config.toml" "$HOME/.codex/config.toml"
 
@@ -50,6 +49,14 @@ npm install -g --ignore-scripts \
 	"@earendil-works/pi-coding-agent@${PI_VERSION}"
 
 install -m 600 "$HOME/dotfiles/.pi/agent/settings.json" "$HOME/.pi/agent/settings.json"
+
+CLAUDE_CODE_VERSION="2.1"
+mkdir -p "$HOME/.claude"
+
+npm install -g \
+	"@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
+
+install -m 600 "$HOME/dotfiles/.claude/settings.json" "$HOME/.claude/settings.json"
 
 # DOTFILES="$HOME/dotfiles"
 
