@@ -43,6 +43,14 @@ npm install -g \
 
 install -m 600 "$HOME/dotfiles/.codex/config.toml" "$HOME/.codex/config.toml"
 
+PI_VERSION="0.87"
+mkdir -p "$HOME/.pi/agent"
+
+npm install -g --ignore-scripts \
+	"@earendil-works/pi-coding-agent@${PI_VERSION}"
+
+install -m 600 "$HOME/dotfiles/.pi/agent/settings.json" "$HOME/.pi/agent/settings.json"
+
 # DOTFILES="$HOME/dotfiles"
 
 # for file in .zshrc ; do
