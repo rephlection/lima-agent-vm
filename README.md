@@ -1,12 +1,17 @@
 # [lima](https://github.com/lima-vm/lima) based conding agent VM config
 
+Creating a lima vm for coding agents.
+
 MicroVM based methods are better.
 
 ## Usage
 - Spin it up: `limactl start ~/agt/lima.yaml --name agt && limactl shell agt`
-- Using the `start_agent.sh` wrapper to start the VM with ssh-agent forwarding: [TODO]
 - Throw it away: `limactl stop agt && limactl delete agt`
 - Take a snapshot: [TODO]
+
+Wrapper with ssh-agent forwarding:
+- `./start_agent.sh <vm_name>` to start the VM with ssh-agent forwarding
+- The rest operations (create/shell/stop/delete) do not need wrapping
 
 ## Functional requirements
 - idempotent environment initialization
@@ -19,7 +24,7 @@ MicroVM based methods are better.
     - [x] unreachable ipv4 host
     - [ ] unreachable ipv6 host
 - ssh key forwarding
-    - [ ] SSH_AUTH_SOCK
+    - [x] SSH_AUTH_SOCK
 - credential management
     - [ ] safely pass in ENV credentials such as API keys
 

@@ -2,11 +2,11 @@
 
 set -euo pipefail
 
+VM_NAME="${1:-agt}"
+
 AGENT_DIR="$HOME/.ssh/coding-agent"
 SOCK="$AGENT_DIR/agent.sock"
 KEY="$AGENT_DIR/id_github_ed25519"
-VM_NAME="agt"
-CONFIG="$HOME/agt/lima.yaml"
 
 if [[ ! -f "$KEY" ]]; then
     echo "Missing SSH private key: $KEY" >&2
@@ -19,6 +19,7 @@ if [[ ! -S "$SOCK" ]]; then
         rm -f "$SOCK"
     fi
 
+    mkdir -p "$AGENT_DIR"
     eval "$(ssh-agent -a "$SOCK")"
 fi
 
@@ -28,6 +29,7 @@ if ! ssh-add -l >/dev/null 2>&1; then
     ssh-add "$KEY"
 fi
 
+echo "VM: $VM_NAME"
 echo "Host SSH agent: $SSH_AUTH_SOCK"
 ssh-add -l
 
