@@ -80,6 +80,11 @@ table inet filter {
         # allow everything except host
         policy accept;
 
+        ct state established,related accept;
+
+        # Keep Lima/host SSH management traffic working.
+        ip daddr $HOST_GATEWAY tcp dport 22 accept;
+
         # block macOS host gateway
         ip daddr $HOST_GATEWAY drop
     }
