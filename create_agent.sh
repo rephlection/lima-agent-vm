@@ -31,4 +31,4 @@ fi
 echo "Host SSH agent: $SSH_AUTH_SOCK"
 ssh-add -l
 
-exec limactl start "$VM_NAME"
+exec limactl create "$CONFIG" --name "$VM_NAME"

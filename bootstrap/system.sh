@@ -27,15 +27,16 @@ apt install -y \
 
 apt install -y nftables
 
+# user
 if ! id "$USERNAME"; then
     useradd \
       -m \
       -s /bin/zsh \
       "$USERNAME"
 fi
-
 chsh -s /bin/zsh $USERNAME
 usermod -c "" $USERNAME
+
 # sudo
 rm -f /etc/sudoers.d/90-cloud-init-users
 echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/apt, /usr/bin/systemctl" \

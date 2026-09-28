@@ -8,9 +8,10 @@ set -euxo pipefail
 mkdir -p ~/.zshrc.d
 mkdir -p ~/.local/bin
 
-# TODO: source ~/.zshrc.d/*
 cat > ~/.zshrc.d/ssh-agent.zsh <<'EOF'
-export SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+if [ -S /run/host-services/ssh-auth.sock ]; then
+    export SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+fi
 EOF
 
 # starship
@@ -31,8 +32,6 @@ nvm install 22
 nvm alias default 22
 echo "END INSTALLING NVM"
 
-# touch ~/.zshrc
-# echo "source ~/dotfiles/.zshrc" >> ~/.zshrc
 grep -qxF 'source ~/dotfiles/.zshrc' ~/.zshrc || echo 'source ~/dotfiles/.zshrc' >> ~/.zshrc
 
 # npm install -g \
