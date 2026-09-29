@@ -3,8 +3,15 @@
 [analytics]
 enabled = false
 
+[feedback]
+enabled = false
+
 [otel]
+# enabled = false
 exporter = "none"
 metrics_exporter = "none"
 trace_exporter = "none"
 log_user_prompt = false
+
+[history]
+# persistence = "none"
