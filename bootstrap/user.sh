@@ -42,7 +42,7 @@ npm install -g \
 
 install -m 600 "$HOME/dotfiles/.codex/config.toml" "$HOME/.codex/config.toml"
 
-PI_VERSION="0.87"
+PI_VERSION="0.99"
 mkdir -p "$HOME/.pi/agent"
 
 npm install -g --ignore-scripts \
