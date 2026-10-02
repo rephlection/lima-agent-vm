@@ -1,4 +1,7 @@
 {
+	"autoEnableCodemode": false,
   "enableInstallTelemetry": false,
-  "enableAnalytics": false
+  "enableAnalytics": false,
+	"theme": "dark",
+	"tuiMode": "regular"
 }
