@@ -1,3 +1,6 @@
+export HISTSIZE=1048576
+export SAVEHIST=$HISTSIZE
+
 export PATH="$HOME/.local/bin:$PATH"
 
 alias fd=fdfind # Debian install fd-find as fdfind because of fd in fdutils
@@ -12,6 +15,7 @@ fi
 export PI_TELEMETRY=0
 # export PI_SKIP_VERSION_CHECK=1
 # export PI_OFFLINE=1
+export PATH="$HOME/.pi/agent/bin:$PATH"
 
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 export CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1
