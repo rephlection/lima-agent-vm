@@ -24,38 +24,36 @@ curl https://sh.rustup.rs -sSf \
 source ~/.cargo/env
 
 # nvm/node
+NVM_VERSION="0.40.8"
+NODE_VERSION="24"
 echo "BEGIN INSTALLING NVM"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh \
-	| bash
+curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" \
+	| bash >/dev/null
 source ~/.nvm/nvm.sh
-nvm install 22
-nvm alias default 22
+nvm install $NODE_VERSION
+nvm alias default $NODE_VERSION
+nvm use default
 echo "END INSTALLING NVM"
 
 grep -qxF 'source ~/dotfiles/.zshrc' ~/.zshrc || echo 'source ~/dotfiles/.zshrc' >> ~/.zshrc
 
-CODEX_VERSION="0.158"
+CODEX_VERSION="0.162.1"
 mkdir -p "$HOME/.codex"
-
-npm install -g \
-	"@openai/codex@${CODEX_VERSION}"
-
+curl -fsSL "https://chatgpt.com/codex/install.sh" \
+    | CODEX_NON_INTERACTIVE=1 sh -s -- --release "$CODEX_VERSION"
 install -m 600 "$HOME/dotfiles/.codex/config.toml" "$HOME/.codex/config.toml"
 
-PI_VERSION="0.99"
+PI_VERSION="1.1.0"
 mkdir -p "$HOME/.pi/agent"
-
-npm install -g --ignore-scripts \
-	"@earendil-works/pi-coding-agent@${PI_VERSION}"
-
+curl -fsSL "https://pi.dev/install.sh" \
+    | sed "s|\"\$PI_INSTALLER_API_BASE/latest\"|\"\$PI_INSTALLER_API_BASE/$PI_VERSION\"|" \
+    | sh
 install -m 600 "$HOME/dotfiles/.pi/agent/settings.json" "$HOME/.pi/agent/settings.json"
 
-CLAUDE_CODE_VERSION="2.1"
+CLAUDE_CODE_VERSION="2.1.294"
 mkdir -p "$HOME/.claude"
-
-npm install -g \
-	"@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
-
+curl -fsSL "https://claude.ai/install.sh" \
+    | bash -s -- "$CLAUDE_CODE_VERSION"
 install -m 600 "$HOME/dotfiles/.claude/settings.json" "$HOME/.claude/settings.json"
 
 # DOTFILES="$HOME/dotfiles"
